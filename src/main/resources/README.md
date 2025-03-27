@@ -1,0 +1,1 @@
+## Initializer for empty resources directory
