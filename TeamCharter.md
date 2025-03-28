@@ -75,9 +75,9 @@ The team will remain in place until **April 16th, 9 PM** (and whenever we need t
 ---
 
 ## Conflict Resolution
-1. **Open Dialogue**: Attempt to resolve conflicts through discussion.
-2. **Team Lead Mediation**: If unresolved, the **team lead** will step in.
-3. **Escalation to Paula**: If necessary, Paula will be consulted.
+1. **Open Dialogue**: Attempt to resolve conflicts through discussion
+2. **Team Lead Mediation**: If unresolved, the **team lead** will step in
+3. **Escalation to Paula**: If necessary, Paula will be consulted
 
 ---
 
