@@ -20,13 +20,14 @@ The service will provide:
 
 ### People
 
-| Property          | Description         | Type/Format |
-|-------------------|---------------------|-------------|
-| id                | unique identifier   | number      |
-| age               | Person's age        | number      |
-| height            | Person's height     | number      |
-| weight            | Person's weight     | number      |
-| bodyfat(optional) | Person's body fat % | number      |
+| Property          | Description             | Type/Format |
+|-------------------|-------------------------|-------------|
+| id                | unique identifier       | number      |
+| age               | Person's age            | number      |
+| sex               | Person's biological sex | string      |
+| height            | Person's height         | number      |
+| weight            | Person's weight         | number      |
+| bodyfat(optional) | Person's body fat %     | number      |
 
 
 ### Calculations
@@ -58,6 +59,77 @@ The service will provide:
 ### Calculations
 - GET/calculation/json/:age:height:weight
 - GET/calculation/json/:age:height:weight:bodyfat (uses a different formula for TDEE w/BF%)
+
+### Response Examples
+All Json responses
+
+#### Person responses
+Example response of getting all people/demo profiles. Getting by ID will just return a single object instead of a collection
+- Might need to view in 'edit' mode, formatting in display mode was not as intended
+[
+
+  {
+    "id": "1"
+    "height": "70",
+    "weight": "200",
+    "sex": "male",
+    "bodyfat": "",
+    "calculations": {
+      "BMI": "value",
+      "BMR": "value",
+      "LBM": "value",
+      "bodyfat": "value",
+      "IBW": "value",
+      "TDEE": "value"
+    }
+  },
+  {
+    "id": "2"
+    "height": "65",
+    "weight": "150",
+    "sex": "male",
+    "bodyfat": "15",
+    "calculations": {
+      "BMI": "value",
+      "BMR": "value",
+      "LBM": "value",
+      "bodyfat": "value",
+      "IBW": "value",
+      "TDEE": "value"
+    }
+  },
+  {...}
+
+]
+
+#### Calculation-only responses
+We can choose to return both the submitted attributes and calculated values (A), or only the calculated values (B).
+
+##### Example A:
+  {
+    "height": "70",
+    "weight": "200",
+    "sex": "male",
+    "bodyfat": "",
+    "calculations": {
+      "BMI": "value",
+      "BMR": "value",
+      "LBM": "value",
+      "bodyfat": "value",
+      "IBW": "value",
+      "TDEE": "value"
+    }
+  }
+##### Example B:
+{
+  "BMI-value": "value",
+  "BMR-value": "value",
+  "LBM-value": "value",
+  "bodyfat-value": "value",
+  "IBW-value": "value",
+  "TDEE-value": "value"
+  ]
+}
 
 ### Considerations
 - I'm thinking the way this would work is we have a collection of people objects of varying heights, sex, weight, etc... and each would have their own collection of health metrics/data
