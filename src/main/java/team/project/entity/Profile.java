@@ -11,6 +11,13 @@ public class Profile {
 
     public Profile() {}
 
+    public Profile(int age, String sex, int height, int weight) {
+        this.id = id;
+        this.age = age;
+        this.sex = sex;
+        this.height = height;
+        this.weight = weight;
+    }
 
     public Profile(int id, int age, String sex, int height, int weight) {
         this.id = id;
