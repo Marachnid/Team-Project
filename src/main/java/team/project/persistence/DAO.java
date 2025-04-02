@@ -2,7 +2,7 @@ package team.project.persistence;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import team.project.api.Planet;
+import team.project.entity.Profile;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -15,17 +15,17 @@ public class DAO {
      * sends an API call to swapi to retrieve the first planet in response
      * @return planet object (not a list of objects)
      */
-    Planet getPlanet() {
+    Profile getProfile() {
 
         Client client = ClientBuilder.newClient();
-        WebTarget target = client.target("https://swapi.info/api/planets/1");
+        WebTarget target = client.target("http://localhost:8080/Team_Project_war/......???????");
         String response = target.request(MediaType.APPLICATION_JSON).get(String.class);
         ObjectMapper mapper = new ObjectMapper();
-        Planet planet = null;
+        Profile profile = null;
 
         try {
 
-            planet = mapper.readValue(response, Planet.class);
+            profile = mapper.readValue(response, Profile.class);
 
         } catch (JsonProcessingException e) {
             e.printStackTrace();
@@ -33,6 +33,6 @@ public class DAO {
             throw new RuntimeException(e);
         }
 
-        return planet;
+        return profile;
     }
 }
