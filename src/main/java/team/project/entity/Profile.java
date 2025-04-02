@@ -2,6 +2,7 @@ package team.project.entity;
 
 public class Profile {
 
+    private int id;
     private int age;
     private String sex;
     private int height;
@@ -10,14 +11,24 @@ public class Profile {
 
     public Profile() {}
 
-
     public Profile(int age, String sex, int height, int weight) {
+        this.id = id;
         this.age = age;
         this.sex = sex;
         this.height = height;
         this.weight = weight;
     }
 
+    public Profile(int id, int age, String sex, int height, int weight) {
+        this.id = id;
+        this.age = age;
+        this.sex = sex;
+        this.height = height;
+        this.weight = weight;
+    }
+
+    public int getId() {return id;}
+    public void setId(int id) {this.id = id;}
 
     public int getAge() {
         return age;

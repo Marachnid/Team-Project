@@ -16,6 +16,7 @@ public class DataApplication extends Application {
     public Set<Class<?>> getClasses() {
         HashSet<Class<?>> h = new HashSet<Class<?>>();
         h.add(CalculateMetrics.class);
+        h.add(UserService.class);
         return h;
     }
 }
