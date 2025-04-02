@@ -28,6 +28,7 @@
     <mockito.version>4.0.0</mockito.version>
     <jersey-version>2.29.1</jersey-version>
     <jackson-version>2.15.0</jackson-version>
+    <jaxb-version>2.3.1</jaxb-version>
 
     <!-- plugin versions -->
     <maven.compiler.version>3.8.1</maven.compiler.version>
@@ -161,6 +162,39 @@
       <artifactId>jersey-hk2</artifactId>
       <version>${jersey-version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.glassfish.jersey.containers</groupId>
+      <artifactId>jersey-container-servlet</artifactId>
+      <version>${jersey-version}</version>
+    </dependency>
+
+<!--  These are extra dependencies I had to add to make this work  -->
+<!--  It could be caused by other packages, or implicit uses of XML by other dependencies  -->
+    <dependency>
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+      <version>${jaxb-version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-impl</artifactId>
+      <version>${jaxb-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.jaxb</groupId>
+      <artifactId>jaxb-runtime</artifactId>
+      <version>${jaxb-version}</version>
+    </dependency>
+
+    <!--this is used to output maps as JSON data w/jersey and jackson-->
+    <dependency>
+      <groupId>org.glassfish.jersey.media</groupId>
+      <artifactId>jersey-media-json-jackson</artifactId>
+      <version>${jersey-version}</version>
+    </dependency>
+<!--    -->
 
     <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
     <dependency>
