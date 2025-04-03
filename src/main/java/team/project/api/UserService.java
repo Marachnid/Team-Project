@@ -68,5 +68,14 @@ public class UserService {
     public Response deletePerson(@PathParam("id") int id) {
         return (users.remove(id) != null) ? Response.noContent().build() : Response.status(Response.Status.NOT_FOUND).build();
     }
+
+    /**
+     * Clears all stored user Profiles in the system
+     * Primarily for testing scenarios removing all existing users ensuring a fresh state before each test execution.
+     */
+    public void resetUsers() {
+        users.clear();
+    }
+
 }
 
