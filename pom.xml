@@ -29,6 +29,8 @@
     <jersey-version>2.29.1</jersey-version>
     <jackson-version>2.15.0</jackson-version>
     <jaxb-version>2.3.1</jaxb-version>
+    <swagger-version>2.2.29</swagger-version>
+
 
     <!-- plugin versions -->
     <maven.compiler.version>3.8.1</maven.compiler.version>
@@ -167,6 +169,13 @@
       <groupId>org.glassfish.jersey.containers</groupId>
       <artifactId>jersey-container-servlet</artifactId>
       <version>${jersey-version}</version>
+    </dependency>
+
+    <!-- for user doc  -->
+    <dependency>
+      <groupId>io.swagger.core.v3</groupId>
+      <artifactId>swagger-jaxrs2</artifactId>
+      <version>${swagger-version}</version>
     </dependency>
 
 <!--  These are extra dependencies I had to add to make this work  -->
