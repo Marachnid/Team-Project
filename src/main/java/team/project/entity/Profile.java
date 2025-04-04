@@ -27,8 +27,9 @@ public class Profile {
         this.weight = weight;
     }
 
-    public int getId() {return id;}
-    public void setId(int id) {this.id = id;}
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
 
     public int getAge() {
         return age;

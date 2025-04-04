@@ -37,13 +37,15 @@ public class CalculateMetrics {
         Profile data = new Profile(age, sex, height, weight);
 
         //the output results are compiled into a Map and will be displayed as such
-        Map<String, Integer> calculations = new HashMap<>();
+        Map<String, Double> calculations = new HashMap<>();
         calculations.put("BMI", calculateBMI(data));
         calculations.put("BMR", calculateBMR(data));
         calculations.put("LBM", calculateLBM(data));
         calculations.put("bodyfat", calculateBodyFat(data));
         calculations.put("IBW", calculateIBW(data));
-        calculations.put("TDEE", calculateTDEE(data));
+
+        // TODO find activity level
+        // calculations.put("TDEE", calculateTDEE(data, activityLevel));
 
         //example of just grabbing/using the raw parameters instead of storing in an object
         String message = age + " " + weight + " " + height + " " + sex;
@@ -54,33 +56,107 @@ public class CalculateMetrics {
     }
 
 
-    public int calculateBMI(Profile data) {
+    /**
+     * @param data Profile data
+     * @return Body mass index
+     */
+    public double calculateBMI(Profile data) {
+        int weight = data.getWeight();
+        int height = data.getHeight();
 
-        return data.getAge();
+        return weight * 703 / Math.pow(height, 2);
+
     }
 
-    public int calculateBMR(Profile data) {
+    /**
+     * @param data Profile data
+     * @return Basal metabolic rate
+     */
+    public double calculateBMR(Profile data) {
+        int weight = data.getWeight();
+        int height = data.getHeight();
+        int age = data.getAge();
+        String sex = data.getSex();
+        double LBM = calculateLBM(data);
 
-        return data.getAge();
+        if (sex.equals("male") || sex.equals("Male")) {
+            return 66 + (6.23 * weight) + (12.7 * height) - (6.8 * age);
+        } else if (sex.equals("female") || sex.equals("Female")) {
+            return 655 + (4.35 * weight) + (4.7 * height) - (4.7 * age);
+        } else {
+            return 370 / (9.8 * LBM);
+        }
+
     }
 
-    public int calculateLBM(Profile data) {
+    /**
+     * @param data Profile data
+     * @return Lean body mass
+     */
+    public double calculateLBM(Profile data) {
+        int weight = data.getWeight();
+        int height = data.getHeight();
+        String sex = data.getSex();
 
-        return data.getAge();
+        if (sex.equals("male") || sex.equals("Male")) {
+            return (0.407 * weight) + (0.267 * height) - 19.2;
+        } else if (sex.equals("female") || sex.equals("Female")) {
+            return (0.252 * weight) + (0.473 * height) - 48.3;
+        } else {
+            return weight * (1 - calculateBMR(data) / 100);
+        }
+
     }
 
-    public int calculateBodyFat(Profile data) {
+    /**
+     * @param data Profile data
+     * @return Body fat percentage
+     */
+    public double calculateBodyFat(Profile data) {
+        double BMI = calculateBMI(data);
+        int age = data.getAge();
+        String sex = data.getSex();
 
-        return data.getAge();
+        if (sex.equals("male") || sex.equals("Male")) {
+            return (1.2 * BMI) + (0.23 * age) - 16.2;
+        } else if (sex.equals("female") || sex.equals("Female")) {
+            return (1.2 * BMI) + (0.23 * age) - 5.4;
+        } else {
+            return -1;
+        }
+
     }
 
-    public int calculateIBW(Profile data) {
+    /**
+     * @param data Profile data
+     * @param activityLevel User activity level
+     * @return Total daily energy expenditure
+     */
+    public double calculateTDEE(Profile data, double activityLevel) {
+        double BMR = calculateBMR(data);
 
-        return data.getAge();
+        return BMR * activityLevel;
     }
 
-    public int calculateTDEE(Profile data) {
 
-        return data.getAge();
+    // TODO choose if we want to use of IBW calculation
+
+    /**
+     * @param data Profile data
+     * @return Ideal body weight
+     */
+    public double calculateIBW(Profile data) {
+        int height = data.getHeight();
+        String sex = data.getSex();
+
+        if (sex.equals("male") || sex.equals("Male") && height > 60) {
+            return 50 + (2.3 * height);
+        } else if (sex.equals("female") || sex.equals("Female") && height > 60) {
+            return 45.5 + (2.3 * height);
+        } else {
+            return -1;
+        }
+
     }
+
 }
