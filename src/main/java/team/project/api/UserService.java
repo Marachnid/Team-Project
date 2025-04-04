@@ -1,5 +1,13 @@
 package team.project.api;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import team.project.entity.Profile;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
@@ -8,6 +16,7 @@ import java.util.*;
 /**
  * Class representing user service
  */
+
 @Path("/user")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -19,6 +28,26 @@ public class UserService {
      * GET all users
      * @return response containing a list of all users in JSON format with HTTP 200 OK.
      */
+    @Operation(summary = "Get all users",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Successful retrieval of users",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = Profile.class)),
+                                    examples = {
+                                            @ExampleObject(
+                                                    name = "All Users Example",
+                                                    summary = "Example list of users",
+                                                    value = "[{\"id\":\"1,\"age\":\"30\",\"sex\":\"male\",\"weight\":\"160}," +
+                                                            "{\"id\":2,\"age\":\"31\",\"sex\":\"female\",\"weight\":\"130}]"
+                                            )
+                                    }
+                            )
+                    )
+            }
+    )
     @GET
     public Response getAllUsers() {
         return Response.ok(new ArrayList<>(users.values())).build();
