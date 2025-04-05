@@ -1,4 +1,7 @@
-package team.project.restdemo;
+package test;
+
+import team.project.api.CalculateMetrics;
+import team.project.api.UserService;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -6,16 +9,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 //Defines the base URI for all resource URIs.
-@ApplicationPath("/demo") //You may want to add a value here so that all traffic isn't routed to the class below.
+@ApplicationPath("/testing")
 
 //The java class declares root resource and provider classes
-public class HelloApplication extends Application {
+public class DataApplication extends Application {
 
     //The method returns a non-empty collection with classes, that must be included in the published JAX-RS application
     @Override
     public Set<Class<?>> getClasses() {
         HashSet<Class<?>> h = new HashSet<Class<?>>();
-        h.add(HelloWorld.class );
+        h.add(Endpoint.class);
         return h;
     }
 }
