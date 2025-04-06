@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Main testing class for Profile DAO operations
  */
-class TestDAOProfile {
+class ProfileDAOTest {
 
     ProfileDAO dao;
     Database database;
