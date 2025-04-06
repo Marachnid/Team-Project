@@ -89,7 +89,7 @@ public class ProfileEntity {
      * SET method for height
      * @param height height
      */
-    public void setHeight(int height) {this.height = height;}
+    public void setHeight(double height) {this.height = height;}
 
     /**
      * GET method for weight
@@ -101,7 +101,7 @@ public class ProfileEntity {
      * SET method for weight
      * @param weight weight
      */
-    public void setWeight(int weight) {this.weight = weight;}
+    public void setWeight(double weight) {this.weight = weight;}
 
     /**
      * GET method for sex-type
@@ -125,5 +125,5 @@ public class ProfileEntity {
      * SET method for activity levels
      * @param activity activity levels
      */
-    public void setActivity(int activity) {this.activity = activity;}
+    public void setActivity(double activity) {this.activity = activity;}
 }

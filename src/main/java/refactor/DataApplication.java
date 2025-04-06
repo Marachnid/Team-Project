@@ -15,7 +15,7 @@ public class DataApplication extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         HashSet<Class<?>> h = new HashSet<Class<?>>();
-        h.add(Endpoint.class);
+        h.add(ProfileServices.class);
         return h;
     }
 }
