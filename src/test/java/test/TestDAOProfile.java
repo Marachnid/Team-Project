@@ -91,8 +91,4 @@ class TestDAOProfile {
         assertNull(dao.getById(1));
         assertEquals(5, dao.getAllProfiles().size());
     }
-
-
-
-
 }

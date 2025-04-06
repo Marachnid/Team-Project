@@ -6,11 +6,12 @@ import javax.persistence.*;
 /**
  * Main entity class for profiles - maps instance variables to DB table
  * A Profile is to be thought of as a physical-profile/general physical characteristics
+ * accesses team_project schema
+ * references profiles db table
  */
 @Entity
 @Table(name = "profiles")
 public class ProfileEntity {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -9,13 +9,21 @@ import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 import java.util.List;
 
 
-
+/**
+ * DAO class for Profile Entity
+ * accesses team_project schema and profiles table/entity to perform insert/delete/edit/get operations
+ */
 public class ProfileDAO {
 
+    //open hibernate session
     private Session getSession() { return SessionFactoryProvider.getSessionFactory().openSession(); }
 
 
-
+    /**
+     * retrieves profile records by id
+     * @param id profile id
+     * @return profile
+     */
     public ProfileEntity getById(int id) {
         Session session = getSession();
         ProfileEntity profile = session.get(ProfileEntity.class, id);
@@ -24,6 +32,10 @@ public class ProfileDAO {
     }
 
 
+    /**
+     * retrieves a list of all profile records
+     * @return list of Profile objects
+     */
     public List<ProfileEntity> getAllProfiles() {
         Session session = getSession();
         HibernateCriteriaBuilder builder = (HibernateCriteriaBuilder) session.getCriteriaBuilder();
@@ -33,6 +45,10 @@ public class ProfileDAO {
     }
 
 
+    /**
+     * updates a designated profile
+     * @param profile profile to be updated
+     */
     public void updateProfile(ProfileEntity profile) {
         Session session = getSession();
         Transaction transaction = session.beginTransaction();
@@ -42,17 +58,23 @@ public class ProfileDAO {
     }
 
 
+    /**
+     * inserts a new profile object as a db record
+     * @param profile profile object to be added
+     */
     public void insertProfile(ProfileEntity profile) {
-
         Session session = getSession();
         Transaction transaction = session.beginTransaction();
         session.persist(profile);
         transaction.commit();
         session.close();
-
     }
 
 
+    /**
+     * deletes a profile record
+     * @param profile profile object/record to be deleted
+     */
     public void deleteProfile(ProfileEntity profile) {
         Session session = getSession();
         Transaction transaction = session.beginTransaction();
@@ -60,6 +82,4 @@ public class ProfileDAO {
         transaction.commit();
         session.close();
     }
-
-
 }
