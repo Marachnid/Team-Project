@@ -1,4 +1,4 @@
-package test;
+package refactor;
 
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -10,7 +10,7 @@ import java.util.List;
 
 
 
-public class TestDAO {
+public class ProfileDAO {
 
     private Session getSession() { return SessionFactoryProvider.getSessionFactory().openSession(); }
 

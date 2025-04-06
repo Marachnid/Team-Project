@@ -1,4 +1,4 @@
-package test;
+package refactor;
 
 public class Endpoint {
 }

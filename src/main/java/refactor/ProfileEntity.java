@@ -1,4 +1,4 @@
-package test;
+package refactor;
 
 import javax.persistence.*;
 

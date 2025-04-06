@@ -1,7 +1,4 @@
-package test;
-
-import team.project.api.CalculateMetrics;
-import team.project.api.UserService;
+package refactor;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

@@ -2,6 +2,8 @@ package test;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import refactor.ProfileEntity;
+import refactor.ProfileDAO;
 import utilities.Database;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +13,9 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Main testing class for Profile DAO operations
  */
-class TestDAOTest {
+class TestDAOProfile {
 
-    TestDAO dao;
+    ProfileDAO dao;
     Database database;
     ProfileEntity profile;
     ProfileEntity alteredProfile;
@@ -23,7 +25,7 @@ class TestDAOTest {
     /**Sets up testing environment*/
     @BeforeEach
     void setUp() {
-        dao = new TestDAO();
+        dao = new ProfileDAO();
         profiles = new ArrayList<>();
         database = Database.getInstance();
         database.runSQL("profiles_clean.sql");
