@@ -5,21 +5,7 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
-
 import java.util.List;
-
-
-
-
-
-
-
-
-//TODO need to couple CalculateMetrics calculations with these return results
-
-
-
-
 
 /**
  * DAO class for Profile Entity

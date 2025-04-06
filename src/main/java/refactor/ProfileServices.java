@@ -44,11 +44,12 @@ public class ProfileServices {
     @Path("GET/{id}")
     public Response getUserById(@PathParam("id") int id) {
 
+        dao = new ProfileDAO();
         ProfileEntity profile = dao.getById(id);
 
         if (profile == null) {
-
             return Response.status(Response.Status.NOT_FOUND).build();
+
         } else {
 
             calculations = new Calculations(profile);
@@ -71,6 +72,7 @@ public class ProfileServices {
             @PathParam("sexType") String sexType,
             @PathParam("activity") double activity) {
 
+        dao = new ProfileDAO();
         ProfileEntity newProfile = new ProfileEntity(age, height, weight, sexType, activity);
         dao.insertProfile(newProfile);
         return Response.status(Response.Status.CREATED).entity(newProfile).build();
@@ -93,7 +95,7 @@ public class ProfileServices {
             @PathParam("sexType") String sexType,
             @PathParam("activity") double activity) {
 
-
+        dao = new ProfileDAO();
         ProfileEntity profileToUpdate = dao.getById(id);
 
         //prevents creating a new profile if the profile-to-edit is null
@@ -102,12 +104,14 @@ public class ProfileServices {
             return Response.status(Response.Status.NOT_FOUND).build();
         } else {
 
+            dao = new ProfileDAO();
             profileToUpdate.setAge(age);
             profileToUpdate.setHeight(height);
             profileToUpdate.setWeight(weight);
             profileToUpdate.setSexType(sexType);
             profileToUpdate.setActivity(activity);
 
+            dao.updateProfile(profileToUpdate);
             return Response.ok(profileToUpdate).build();
         }
     }
@@ -122,6 +126,7 @@ public class ProfileServices {
     @Path("/DELETE/{id}")
     public Response deletePerson(@PathParam("id") int id) {
 
+        dao = new ProfileDAO();
         ProfileEntity profileToDelete = dao.getById(id);
 
         //prevents requests to delete null objects

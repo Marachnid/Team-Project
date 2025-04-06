@@ -63,6 +63,7 @@ public class CalculationServices {
 
         profile = new ProfileEntity(age, height, weight, sexType, activity);
         calculations = new Calculations(profile);
-        return Response.ok(calculations).build();
+        profile.setCalculations(calculations.getCalculations());
+        return Response.ok(profile).build();
     }
 }
