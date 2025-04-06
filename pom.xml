@@ -75,7 +75,6 @@
       <groupId>javax.persistence</groupId>
       <artifactId>javax.persistence-api</artifactId>
       <version>${persistence.version}</version>
-      <scope>provided</scope>
     </dependency>
 
 <!--    <dependency>-->

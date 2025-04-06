@@ -16,12 +16,12 @@ public class ProfileServices {
 
     ProfileDAO dao = new ProfileDAO();
 
-
     /**
      * GETS all Profiles
      * @return response containing a list of all profiles in JSON format with HTTP 200 OK.
      */
     @GET
+    @Path("GET/")
     public Response getAllUsers() {
 
             List<ProfileEntity> profiles = dao.getAllProfiles();
@@ -34,7 +34,7 @@ public class ProfileServices {
      * @return JSON response of Profile data - HTTP 200 OK or a 404 not found if Profile doesn't exist
      */
     @GET
-    @Path("/{id}")
+    @Path("GET/{id}")
     public Response getUserById(@PathParam("id") int id) {
 
         ProfileEntity profile = dao.getById(id);
@@ -54,7 +54,7 @@ public class ProfileServices {
      * @return JSON response of Profile data posted - HTTP 201
      */
     @POST
-    @Path("/{age}/{height}/{weight}/{sex}/{activity}")
+    @Path("POST/{age}/{height}/{weight}/{sex}/{activity}")
     public Response addProfile(
             @PathParam("age") int age,
             @PathParam("height") double height,
@@ -68,12 +68,14 @@ public class ProfileServices {
     }
 
 
+
     /**
-     * PUTS/updates a Profile object/record from updated parameters
-     * @return JSON response of Profile data/records being updated - HTTP 200
+     * PUTS/updates a Profile object/record from new arguments
+     * checks if the entered id matches any records to prevent creating new Profiles/records
+     * @return JSON response of Profile data/records being updated - HTTP 200, 404 if not found
      */
     @PUT
-    @Path("/{id}/{age}/{height}/{weight}/{sex}/{activity}")
+    @Path("PUT/{id}/{age}/{height}/{weight}/{sex}/{activity}")
     public Response updateUser(
             @PathParam("id") int id,
             @PathParam("age") int age,
@@ -103,11 +105,12 @@ public class ProfileServices {
 
 
     /**
-     * DELETE a Profile object/record
+     * DELETE a Profile object/record by ID
+     * checks if record-to-delete exists to prevent deleting null objects
      * @return JSON response showing which Profile object/record was deleted - HTTP 200, 404 if not found
      */
     @DELETE
-    @Path("/{id}")
+    @Path("/DELETE/{id}")
     public Response deletePerson(@PathParam("id") int id) {
 
         ProfileEntity profileToDelete = dao.getById(id);
