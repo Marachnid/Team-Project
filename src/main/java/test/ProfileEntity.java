@@ -1,7 +1,6 @@
 package test;
 
 import javax.persistence.*;
-import java.util.Set;
 
 
 /**
@@ -21,16 +20,16 @@ public class ProfileEntity {
     private int age;
 
     @Column(name = "height")
-    private int height;
+    private double height;
 
     @Column(name = "weight")
-    private int weight;
+    private double weight;
 
     @Column(name = "sex")
     private String sex;
 
     @Column(name = "activity")
-    private int activity;
+    private double activity;
 
 
     //empty constructor
@@ -38,7 +37,7 @@ public class ProfileEntity {
 
 
     //full constructor including all variables
-    public ProfileEntity(int id, int age, int height, int weight, String sex, int activity) {
+    public ProfileEntity(int id, int age, double height, double weight, String sex, double activity) {
         this.id = id;
         this.age = age;
         this.height = height;
@@ -48,7 +47,7 @@ public class ProfileEntity {
     }
 
     //partial constructor excluding ID for independent calculations without DB interaction
-    public ProfileEntity(int age, int height, int weight, String sex, int activity) {
+    public ProfileEntity(int age, double height, double weight, String sex, double activity) {
         this.age = age;
         this.height = height;
         this.weight = weight;
@@ -85,7 +84,7 @@ public class ProfileEntity {
      * GET method for height
      * @return height
      */
-    public int getHeight() {return height;}
+    public double getHeight() {return height;}
 
     /**
      * SET method for height
@@ -97,7 +96,7 @@ public class ProfileEntity {
      * GET method for weight
      * @return weight
      */
-    public int getWeight() {return weight;}
+    public double getWeight() {return weight;}
 
     /**
      * SET method for weight
@@ -121,7 +120,7 @@ public class ProfileEntity {
      * GET method for activity levels
      * @return activity levels
      */
-    public int getActivity() {return activity;}
+    public double getActivity() {return activity;}
 
     /**
      * SET method for activity levels
