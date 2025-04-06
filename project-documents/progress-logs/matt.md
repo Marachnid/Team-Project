@@ -19,3 +19,8 @@
   - Created GENERIC properties/hibernate files with instructions on how to set username/password/rename the file to make it work easily
   - Spent a little while refactoring naming conventions and setting/checking URI paths
   - Put together screenshots showing each URI/API call and their results from POSTMAN in project-documents/screenshots
+- Final Update
+  - Built out the calculation methods and created a testing class for them
+  - Made several tweaks all-round to integrate activity-levels and other necessary pieces that were left out initially
+  - Performed some unit testing in POSTMAN and took screenshots of successful API usages for each endpoint path
+  - The backend is pretty much done besides some additional testing, validation handling, and logging
