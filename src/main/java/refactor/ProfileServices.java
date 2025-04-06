@@ -14,7 +14,8 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 public class ProfileServices {
 
-    ProfileDAO dao = new ProfileDAO();
+    ProfileDAO dao;
+    Calculations calculations;
 
     /**
      * GETS all Profiles
@@ -23,9 +24,15 @@ public class ProfileServices {
     @GET
     @Path("GET/")
     public Response getAllUsers() {
+        dao = new ProfileDAO();
+        List<ProfileEntity> profiles = dao.getAllProfiles();
 
-            List<ProfileEntity> profiles = dao.getAllProfiles();
-            return Response.ok(profiles).build();
+        //iterate through retrieved list to set calculation map of each Profile
+        for (ProfileEntity profile : profiles) {
+            calculations = new Calculations(profile);
+            profile.setCalculations(calculations.getCalculations());
+        }
+        return Response.ok(profiles).build();
     }
 
 
@@ -44,6 +51,8 @@ public class ProfileServices {
             return Response.status(Response.Status.NOT_FOUND).build();
         } else {
 
+            calculations = new Calculations(profile);
+            profile.setCalculations(calculations.getCalculations());
             return Response.ok(profile).build();
         }
     }

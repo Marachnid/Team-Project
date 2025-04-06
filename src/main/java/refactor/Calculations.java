@@ -1,6 +1,8 @@
 package refactor;
 
 
+import refactor.ProfileEntity;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,13 +19,15 @@ public class Calculations {
     private String sexType;
     private double activity;
     private Map<String, Double> calculations;
+    private ProfileEntity profile;
 
 
     /**empty constructor*/
     public Calculations() {}
 
     /**
-     * calculation constructor
+     * calculation constructor with raw parameters/arguments
+     * used for performing calculations with no profile attachment
      * @param age age
      * @param height height
      * @param weight weight
@@ -36,6 +40,19 @@ public class Calculations {
         this.weight = weight;
         this.sexType = sexType.toLowerCase();
         this.activity = activity;
+    }
+
+    /**
+     * calculation constructor with predefined Profile object
+     * used for performing and attaching calculations to Profile objects
+     * @param profile Profile object
+     */
+    public Calculations(ProfileEntity profile) {
+        this.age = profile.getAge();
+        this.height = profile.getHeight();
+        this.weight = profile.getWeight();
+        this.sexType = profile.getSexType().toLowerCase();
+        this.activity = profile.getActivity();
     }
 
 
@@ -210,17 +227,17 @@ public class Calculations {
     }
 
     /**
-     * GETS calculations
+     * GETS calculations (rounds results to 2 decimal places)
      * @return calculations
      */
     public Map<String, Double> getCalculations() {
         calculations = new HashMap<>();
-        calculations.put("BMI", calculateBMI());
-        calculations.put("BMR", calculateBMR());
-        calculations.put("LBM", calculateLBM());
-        calculations.put("bodyfat", calculateBodyFat());
-        calculations.put("TDEE", calculateTDEE());
-        calculations.put("IBW", calculateIBW());
+        calculations.put("BMI", Math.round(calculateBMI() * 100.0) / 100.0);
+        calculations.put("BMR", Math.round(calculateBMR() * 100.0) / 100.0);
+        calculations.put("LBM", Math.round(calculateLBM() * 100.0) / 100.0);
+        calculations.put("bodyfat", Math.round(calculateBodyFat() * 100.0) / 100.0);
+        calculations.put("TDEE", Math.round(calculateTDEE() * 100.0) / 100.0);
+        calculations.put("IBW", Math.round(calculateIBW() * 100.0) / 100.0);
         return calculations;
     }
 

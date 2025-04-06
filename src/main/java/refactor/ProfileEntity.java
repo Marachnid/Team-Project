@@ -1,6 +1,7 @@
 package refactor;
 
 import javax.persistence.*;
+import java.util.Map;
 
 
 /**
@@ -32,6 +33,9 @@ public class ProfileEntity {
 
     @Column(name = "activity")
     private double activity;
+
+    @Transient
+    private Map<String, Double> calculations;
 
 
     //empty constructor
@@ -126,4 +130,16 @@ public class ProfileEntity {
      * @param activity activity levels
      */
     public void setActivity(double activity) {this.activity = activity;}
+
+    /**
+     * GET method for calculations
+     * @return calculations map
+     */
+    public Map<String, Double> getCalculations() {return calculations;}
+
+    /**
+     * SET method for calculations
+     * @param calculations calculations map
+     */
+    public void setCalculations(Map<String, Double> calculations) {this.calculations = calculations;}
 }
