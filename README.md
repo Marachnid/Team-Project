@@ -177,5 +177,6 @@ We can choose to return both the submitted attributes and calculated values (A),
 - activity levels:
     - sedentary - 1.2             --office job with no exercise
     - lightly active - 1.375      --exercise 1-2 times a week
-    - moderately active - 1.725   --exercise 3-5 times a week
-    - extra active - 1.9          --exercise 6+ times a week
+    - moderately active - 1.55    --exercise 3-5 times a week
+    - active - 1.725              --exercise 6-7 times a week
+    - extra active - 1.9          --exercise 6-7 hard exercises a week

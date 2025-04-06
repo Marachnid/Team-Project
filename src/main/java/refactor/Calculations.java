@@ -1,8 +1,5 @@
 package refactor;
 
-
-import refactor.ProfileEntity;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,8 +15,6 @@ public class Calculations {
     private double weight;
     private String sexType;
     private double activity;
-    private Map<String, Double> calculations;
-    private ProfileEntity profile;
 
 
     /**empty constructor*/
@@ -42,6 +37,7 @@ public class Calculations {
         this.activity = activity;
     }
 
+
     /**
      * calculation constructor with predefined Profile object
      * used for performing and attaching calculations to Profile objects
@@ -58,6 +54,7 @@ public class Calculations {
 
     /**
      * calculates estimated BMI (body mass index) with height and weight
+     * https://my.clevelandclinic.org/health/articles/9464-body-mass-index-bmi --- formula source
      * @return calculated BMI
      */
     public double calculateBMI() {
@@ -73,10 +70,10 @@ public class Calculations {
         double bmr = 0;
 
         if (sexType.equals("male")) {
-            bmr =  66 + (6.23 * weight) + (12.7 * height) - (6.8 * age);
+            bmr = (88.362 + (13.397 * (weight / 2.2)) + (4.799 * (height * 2.54)) - (5.677 * age));
 
         } else if (sexType.equals("female")) {
-            bmr =  655 + (4.35 * weight) + (4.7 * height) - (4.7 * age);
+            bmr =  447.593 + (9.247 * (weight / 2.2)) + (3.098 * (height * 2.54)) - (4.330 * age);
         }
 
         return bmr;
@@ -85,16 +82,18 @@ public class Calculations {
 
     /**
      * calculates estimated LBM (lean body mass) with sexType, height, weight
+     * https://www.bmi-calculator.net/lean-body-mass-calculator/ --- formula source (boer formula)
+     * has to convert from metric kg/cm to imperial lbs/in units (multiply and dividing by 2.2 and 2.54)
      * @return calculated LBM
      */
     public double calculateLBM() {
         double lbm = 0;
 
         if (sexType.equals("male")) {
-            lbm = (0.407 * weight) + (0.267 * height) - 19.2;
+            lbm = ((0.407 * (weight / 2.2)) + ((0.267 * height * 2.54)) - 19.2) * 2.2;
 
         } else if (sexType.equals("female")) {
-            lbm = (0.252 * weight) + (0.473 * height) - 48.3;
+            lbm = ((0.407 * (weight / 2.2)) + ((0.267 * height * 2.54)) - 19.2) * 2.2;
         }
 
         return lbm;
@@ -103,6 +102,7 @@ public class Calculations {
 
     /**
      * calculates estimated body fat percentage with sexType, BMI, age
+     * https://www.calculator.net/body-fat-calculator.html --- formula source
      * @return calculated bodyFat percentage
      */
     public double calculateBodyFat() {
@@ -121,6 +121,7 @@ public class Calculations {
 
     /**
      * calculates estimated TDEE (total daily energy expenditure) with BMR and activity
+     * https://www.gigacalculator.com/calculators/tdee-calculator.php --- formula source
      * @return calculated TDEE
      */
     public double calculateTDEE() {
@@ -130,108 +131,29 @@ public class Calculations {
 
     /**
      * calculates estimated IBW (ideal body weight) based on height - not very accurate
+     * initial values are in kilograms -- multiplied by 2.2 to convert to pounds
+     * https://www.bmi-calculator.net/ideal-weight-calculator/robinson-formula/ --- formula source
      * @return calculated IBW
      */
     public double calculateIBW() {
         double ibw = 0;
 
         if (sexType.equals("male")) {
-            ibw = 50 + (2.3 * height);
+            ibw = (52 + (1.9 * (height - 60))) * 2.2;
 
         } else if (sexType.equals("female")) {
-            ibw = 45.5 + (2.3 * height);
+            ibw = (49 + (1.7 * (height - 60))) * 2.2;
         }
-
         return ibw;
     }
 
-
-    /**
-     * GETS age
-     * @return age
-     */
-    public int getAge() {
-        return age;
-    }
-
-    /**
-     * SETS age
-     * @param age age
-     */
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    /**
-     * GETS height
-     * @return height
-     */
-    public double getHeight() {
-        return height;
-    }
-
-    /**
-     * SETS height
-     * @param height height
-     */
-    public void setHeight(double height) {
-        this.height = height;
-    }
-
-    /**
-     * GETS weight
-     * @return weight
-     */
-    public double getWeight() {
-        return weight;
-    }
-
-    /**
-     * SETS weight
-     * @param weight weight
-     */
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    /**
-     * GETS sexType
-     * @return sexType
-     */
-    public String getSexType() {
-        return sexType;
-    }
-
-    /**
-     * SETS sexType
-     * @param sexType sexType
-     */
-    public void setSexType(String sexType) {
-        this.sexType = sexType;
-    }
-
-    /**
-     * GETS activity levels
-     * @return activity levels
-     */
-    public double getActivity() {
-        return activity;
-    }
-
-    /**
-     * SETS activity levels
-     * @param activity activity levels
-     */
-    public void setActivity(double activity) {
-        this.activity = activity;
-    }
 
     /**
      * GETS calculations (rounds results to 2 decimal places)
      * @return calculations
      */
     public Map<String, Double> getCalculations() {
-        calculations = new HashMap<>();
+        Map<String, Double>calculations = new HashMap<>();
         calculations.put("BMI", Math.round(calculateBMI() * 100.0) / 100.0);
         calculations.put("BMR", Math.round(calculateBMR() * 100.0) / 100.0);
         calculations.put("LBM", Math.round(calculateLBM() * 100.0) / 100.0);
@@ -239,13 +161,5 @@ public class Calculations {
         calculations.put("TDEE", Math.round(calculateTDEE() * 100.0) / 100.0);
         calculations.put("IBW", Math.round(calculateIBW() * 100.0) / 100.0);
         return calculations;
-    }
-
-    /**
-     * SETS calculations
-     * @param calculations calculations
-     */
-    public void setCalculations(Map<String, Double> calculations) {
-        this.calculations = calculations;
     }
 }
