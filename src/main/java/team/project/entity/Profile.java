@@ -1,7 +1,11 @@
 package team.project.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(description = "Represents a user in the system")
 public class Profile {
 
+    @Schema(description = "User's ID", example = "123")
     private int id;
     private int age;
     private String sex;
