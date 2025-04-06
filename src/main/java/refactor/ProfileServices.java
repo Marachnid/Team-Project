@@ -54,12 +54,12 @@ public class ProfileServices {
      * @return JSON response of Profile data posted - HTTP 201
      */
     @POST
-    @Path("POST/{age}/{height}/{weight}/{sex}/{activity}")
+    @Path("POST/{age}/{height}/{weight}/{sexType}/{activity}")
     public Response addProfile(
             @PathParam("age") int age,
             @PathParam("height") double height,
             @PathParam("weight") double weight,
-            @PathParam("sex") String sexType,
+            @PathParam("sexType") String sexType,
             @PathParam("activity") double activity) {
 
         ProfileEntity newProfile = new ProfileEntity(age, height, weight, sexType, activity);
@@ -75,13 +75,13 @@ public class ProfileServices {
      * @return JSON response of Profile data/records being updated - HTTP 200, 404 if not found
      */
     @PUT
-    @Path("PUT/{id}/{age}/{height}/{weight}/{sex}/{activity}")
+    @Path("PUT/{id}/{age}/{height}/{weight}/{sexType}/{activity}")
     public Response updateUser(
             @PathParam("id") int id,
             @PathParam("age") int age,
             @PathParam("height") double height,
             @PathParam("weight") double weight,
-            @PathParam("sex") String sexType,
+            @PathParam("sexType") String sexType,
             @PathParam("activity") double activity) {
 
 
@@ -96,7 +96,7 @@ public class ProfileServices {
             profileToUpdate.setAge(age);
             profileToUpdate.setHeight(height);
             profileToUpdate.setWeight(weight);
-            profileToUpdate.setSex(sexType);
+            profileToUpdate.setSexType(sexType);
             profileToUpdate.setActivity(activity);
 
             return Response.ok(profileToUpdate).build();

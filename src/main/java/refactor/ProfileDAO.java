@@ -9,6 +9,18 @@ import org.hibernate.query.criteria.HibernateCriteriaBuilder;
 import java.util.List;
 
 
+
+
+
+
+
+
+//TODO need to couple CalculateMetrics calculations with these return results
+
+
+
+
+
 /**
  * DAO class for Profile Entity
  * accesses team_project schema and profiles table/entity to perform insert/delete/edit/get operations

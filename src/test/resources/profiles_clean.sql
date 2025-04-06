@@ -27,7 +27,7 @@ CREATE TABLE `profiles` (
   `age` int NOT NULL,
   `height` decimal(5,2) NOT NULL,
   `weight` decimal(5,2) NOT NULL,
-  `sex` char(6) NOT NULL,
+  `sexType` char(6) NOT NULL,
   `activity` decimal(3,2) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

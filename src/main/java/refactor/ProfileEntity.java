@@ -27,8 +27,8 @@ public class ProfileEntity {
     @Column(name = "weight")
     private double weight;
 
-    @Column(name = "sex")
-    private String sex;
+    @Column(name = "sexType")
+    private String sexType;
 
     @Column(name = "activity")
     private double activity;
@@ -43,14 +43,14 @@ public class ProfileEntity {
      * @param age profile age
      * @param height profile height
      * @param weight profile weight
-     * @param sex profile sex-type
+     * @param sexType profile sexType
      * @param activity profile activity
      */
-    public ProfileEntity(int age, double height, double weight, String sex, double activity) {
+    public ProfileEntity(int age, double height, double weight, String sexType, double activity) {
         this.age = age;
         this.height = height;
         this.weight = weight;
-        this.sex = sex;
+        this.sexType = sexType;
         this.activity = activity;
     }
 
@@ -104,16 +104,16 @@ public class ProfileEntity {
     public void setWeight(double weight) {this.weight = weight;}
 
     /**
-     * GET method for sex-type
-     * @return sex-type
+     * GET method for sexType
+     * @return sexType
      */
-    public String getSex() {return sex;}
+    public String getSexType() {return sexType;}
 
     /**
-     * SET method for sex-type
-     * @param sex sex-type
+     * SET method for sexType
+     * @param sexType sexType
      */
-    public void setSex(String sex) {this.sex = sex;}
+    public void setSexType(String sexType) {this.sexType = sexType;}
 
     /**
      * GET method for activity levels
