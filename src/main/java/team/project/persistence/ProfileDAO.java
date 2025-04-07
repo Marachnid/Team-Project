@@ -41,7 +41,10 @@ public class ProfileDAO {
         HibernateCriteriaBuilder builder = (HibernateCriteriaBuilder) session.getCriteriaBuilder();
         CriteriaQuery<Profile> criteria = builder.createQuery(Profile.class);
         Root<Profile> root = criteria.from(Profile.class);
-        return session.createQuery(criteria).list();
+        criteria.select(root);
+        List<Profile> profiles = session.createQuery(criteria).getResultList();
+        session.close();
+        return profiles;
     }
 
 
