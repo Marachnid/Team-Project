@@ -30,8 +30,8 @@ public class DataApplication extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         HashSet<Class<?>> h = new HashSet<Class<?>>();
-        h.add(CalculateMetrics.class);
-        h.add(UserService.class);
+        h.add(CalculationServices.class);
+        h.add(ProfileServices.class);
         h.add(OpenApiResource.class);
         return h;
     }

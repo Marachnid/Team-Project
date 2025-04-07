@@ -1,4 +1,8 @@
-package refactor;
+package team.project.api;
+
+import team.project.entity.Calculations;
+import team.project.entity.Profile;
+import team.project.persistence.ProfileDAO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -25,10 +29,10 @@ public class ProfileServices {
     @Path("GET/")
     public Response getAllProfiles() {
         dao = new ProfileDAO();
-        List<ProfileEntity> profiles = dao.getAllProfiles();
+        List<Profile> profiles = dao.getAllProfiles();
 
         //iterate through retrieved list to set calculation map of each Profile
-        for (ProfileEntity profile : profiles) {
+        for (Profile profile : profiles) {
             calculations = new Calculations(profile);
             profile.setCalculations(calculations.getCalculations());
         }
@@ -45,7 +49,7 @@ public class ProfileServices {
     public Response getProfileById(@PathParam("id") int id) {
 
         dao = new ProfileDAO();
-        ProfileEntity profile = dao.getById(id);
+        Profile profile = dao.getById(id);
 
         if (profile == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -73,7 +77,7 @@ public class ProfileServices {
             @PathParam("activity") double activity) {
 
         dao = new ProfileDAO();
-        ProfileEntity newProfile = new ProfileEntity(age, height, weight, sexType, activity);
+        Profile newProfile = new Profile(age, height, weight, sexType, activity);
         dao.insertProfile(newProfile);
         return Response.status(Response.Status.CREATED).entity(newProfile).build();
     }
@@ -95,7 +99,7 @@ public class ProfileServices {
             @PathParam("activity") double activity) {
 
         dao = new ProfileDAO();
-        ProfileEntity profileToUpdate = dao.getById(id);
+        Profile profileToUpdate = dao.getById(id);
 
         //prevents creating a new profile if the profile-to-edit is null
         if (profileToUpdate == null) {
@@ -126,7 +130,7 @@ public class ProfileServices {
     public Response deleteProfile(@PathParam("id") int id) {
 
         dao = new ProfileDAO();
-        ProfileEntity profileToDelete = dao.getById(id);
+        Profile profileToDelete = dao.getById(id);
 
         //prevents requests to delete null objects
         if (profileToDelete == null) {

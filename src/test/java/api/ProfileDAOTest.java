@@ -1,9 +1,9 @@
-package refactor.test;
+package api;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import refactor.ProfileEntity;
-import refactor.ProfileDAO;
+import team.project.entity.Profile;
+import team.project.persistence.ProfileDAO;
 import utilities.Database;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +17,9 @@ class ProfileDAOTest {
 
     ProfileDAO dao;
     Database database;
-    ProfileEntity profile;
-    ProfileEntity alteredProfile;
-    List<ProfileEntity> profiles;
+    Profile profile;
+    Profile alteredProfile;
+    List<Profile> profiles;
 
 
     /**Sets up testing environment*/
@@ -53,7 +53,7 @@ class ProfileDAOTest {
     /**Tests adding a profile*/
     @Test
     void addProfileSuccess() {
-        profile = new ProfileEntity(20, 70, 185, "male", 1);
+        profile = new Profile(20, 70, 185, "male", 1);
         dao.insertProfile(profile);
 
         alteredProfile = dao.getById(profile.getId());

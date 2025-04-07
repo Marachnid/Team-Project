@@ -1,4 +1,7 @@
-package refactor;
+package team.project.api;
+
+import team.project.entity.Calculations;
+import team.project.entity.Profile;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -14,7 +17,7 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 public class CalculationServices {
 
-    ProfileEntity profile;
+    Profile profile;
     Calculations calculations;
 
 
@@ -61,7 +64,7 @@ public class CalculationServices {
             @PathParam("activity") double activity) {
 
 
-        profile = new ProfileEntity(age, height, weight, sexType, activity);
+        profile = new Profile(age, height, weight, sexType, activity);
         calculations = new Calculations(profile);
         profile.setCalculations(calculations.getCalculations());
         return Response.ok(profile).build();

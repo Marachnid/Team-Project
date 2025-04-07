@@ -1,4 +1,4 @@
-package refactor;
+package team.project.persistence;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;

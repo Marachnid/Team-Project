@@ -1,4 +1,4 @@
-package refactor;
+package team.project.entity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,7 +43,7 @@ public class Calculations {
      * used for performing and attaching calculations to Profile objects
      * @param profile Profile object
      */
-    public Calculations(ProfileEntity profile) {
+    public Calculations(Profile profile) {
         this.age = profile.getAge();
         this.height = profile.getHeight();
         this.weight = profile.getWeight();
