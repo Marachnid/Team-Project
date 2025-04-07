@@ -25,11 +25,12 @@ DROP TABLE IF EXISTS `profiles`;
 CREATE TABLE `profiles` (
   `id` int NOT NULL AUTO_INCREMENT,
   `age` int NOT NULL,
-  `height(in)` int NOT NULL,
-  `weight` int NOT NULL,
-  `sex` char(6) NOT NULL,
+  `height` decimal(5,2) NOT NULL,
+  `weight` decimal(5,2) NOT NULL,
+  `sexType` char(6) NOT NULL,
+  `activity` decimal(3,2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +39,7 @@ CREATE TABLE `profiles` (
 
 LOCK TABLES `profiles` WRITE;
 /*!40000 ALTER TABLE `profiles` DISABLE KEYS */;
+INSERT INTO `profiles` VALUES (1,20,70.00,150.00,'male',1.00),(2,25,75.00,175.00,'male',1.20),(3,30,78.00,200.00,'male',1.50),(4,20,60.00,125.00,'female',1.00),(5,25,65.00,150.00,'female',1.20),(6,30,68.00,175.00,'female',1.50);
 /*!40000 ALTER TABLE `profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-01 20:39:26
+-- Dump completed on 2025-04-05 20:08:56
