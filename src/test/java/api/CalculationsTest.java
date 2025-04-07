@@ -1,8 +1,8 @@
-package refactor.test;
+package api;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import refactor.Calculations;
+import team.project.entity.Calculations;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**

@@ -1,10 +1,12 @@
-package refactor;
+package team.project.persistence;
 
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
+import team.project.entity.Profile;
+
 import java.util.List;
 
 /**
@@ -22,9 +24,9 @@ public class ProfileDAO {
      * @param id profile id
      * @return profile
      */
-    public ProfileEntity getById(int id) {
+    public Profile getById(int id) {
         Session session = getSession();
-        ProfileEntity profile = session.get(ProfileEntity.class, id);
+        Profile profile = session.get(Profile.class, id);
         session.close();
         return profile;
     }
@@ -34,11 +36,11 @@ public class ProfileDAO {
      * retrieves a list of all profile records
      * @return list of Profile objects
      */
-    public List<ProfileEntity> getAllProfiles() {
+    public List<Profile> getAllProfiles() {
         Session session = getSession();
         HibernateCriteriaBuilder builder = (HibernateCriteriaBuilder) session.getCriteriaBuilder();
-        CriteriaQuery<ProfileEntity> criteria = builder.createQuery(ProfileEntity.class);
-        Root<ProfileEntity> root = criteria.from(ProfileEntity.class);
+        CriteriaQuery<Profile> criteria = builder.createQuery(Profile.class);
+        Root<Profile> root = criteria.from(Profile.class);
         return session.createQuery(criteria).list();
     }
 
@@ -47,7 +49,7 @@ public class ProfileDAO {
      * updates a designated profile
      * @param profile profile to be updated
      */
-    public void updateProfile(ProfileEntity profile) {
+    public void updateProfile(Profile profile) {
         Session session = getSession();
         Transaction transaction = session.beginTransaction();
         session.merge(profile);
@@ -60,7 +62,7 @@ public class ProfileDAO {
      * inserts a new profile object as a db record
      * @param profile profile object to be added
      */
-    public void insertProfile(ProfileEntity profile) {
+    public void insertProfile(Profile profile) {
         Session session = getSession();
         Transaction transaction = session.beginTransaction();
         session.persist(profile);
@@ -73,7 +75,7 @@ public class ProfileDAO {
      * deletes a profile record
      * @param profile profile object/record to be deleted
      */
-    public void deleteProfile(ProfileEntity profile) {
+    public void deleteProfile(Profile profile) {
         Session session = getSession();
         Transaction transaction = session.beginTransaction();
         session.remove(profile);
