@@ -23,7 +23,7 @@ public class ProfileServices {
      */
     @GET
     @Path("GET/")
-    public Response getAllUsers() {
+    public Response getAllProfiles() {
         dao = new ProfileDAO();
         List<ProfileEntity> profiles = dao.getAllProfiles();
 
@@ -42,7 +42,7 @@ public class ProfileServices {
      */
     @GET
     @Path("GET/{id}")
-    public Response getUserById(@PathParam("id") int id) {
+    public Response getProfileById(@PathParam("id") int id) {
 
         dao = new ProfileDAO();
         ProfileEntity profile = dao.getById(id);
@@ -79,7 +79,6 @@ public class ProfileServices {
     }
 
 
-
     /**
      * PUTS/updates a Profile object/record from new arguments
      * checks if the entered id matches any records to prevent creating new Profiles/records
@@ -87,7 +86,7 @@ public class ProfileServices {
      */
     @PUT
     @Path("PUT/{id}/{age}/{height}/{weight}/{sexType}/{activity}")
-    public Response updateUser(
+    public Response updateProfile(
             @PathParam("id") int id,
             @PathParam("age") int age,
             @PathParam("height") double height,
@@ -124,7 +123,7 @@ public class ProfileServices {
      */
     @DELETE
     @Path("/DELETE/{id}")
-    public Response deletePerson(@PathParam("id") int id) {
+    public Response deleteProfile(@PathParam("id") int id) {
 
         dao = new ProfileDAO();
         ProfileEntity profileToDelete = dao.getById(id);
