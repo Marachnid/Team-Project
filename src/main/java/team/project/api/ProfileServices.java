@@ -1,5 +1,13 @@
 package team.project.api;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import team.project.entity.Calculations;
 import team.project.entity.Profile;
 import team.project.persistence.ProfileDAO;
@@ -27,6 +35,32 @@ public class ProfileServices {
      */
     @GET
     @Path("GET/")
+    @Operation(
+            summary = "Get all profiles",
+            description = "Retrieves all profiles. Returns 200 OK.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Successful retrieval of profiles",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = Profile.class)),
+                                    examples = {
+                                            @ExampleObject(
+                                                    name = "All Profiles Example",
+                                                    summary = "Example list of profiles",
+                                                    value = "[{\"id\": \"1\", \"age\": \"30\", \"sexType\": \"male\", \"height\": \"70\", \"weight\": \"160\", \"activity\": \"1.725\"}," +
+                                                            "{\"id\": \"2\", \"age\": \"31\", \"sexType\": \"female\", \"height\": \"65\", \"weight\": \"130\", \"activity\": \"1.3\"}]"
+                                            )
+                                    }
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Internal server error"
+                    )
+            }
+    )
     public Response getAllProfiles() {
         dao = new ProfileDAO();
         List<Profile> profiles = dao.getAllProfiles();
@@ -45,8 +79,43 @@ public class ProfileServices {
      * @return JSON response of Profile data - HTTP 200 OK or a 404 not found if Profile doesn't exist
      */
     @GET
+    @Operation(
+            summary = "Get a profile by ID",
+            description = "Retrieves a single profile by its ID. Returns 200 OK if found, or 404 Not Found if the profile does not exist.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Profile found and returned successfully",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = Profile.class),
+                                    examples = {
+                                            @ExampleObject(
+                                                    name = "Profile Example",
+                                                    summary = "A single profile",
+                                                    value = "{\"id\": \"1\", \"age\": \"30\", \"height\": \"70\", \"sexType\": \"male\", \"weight\": \"160\", \"activity\": \"1.725\"}"
+                                            )
+                                    }
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Profile not found"
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Internal server error"
+                    )
+            }
+    )
     @Path("GET/{id}")
-    public Response getProfileById(@PathParam("id") int id) {
+    public Response getProfileById( @Parameter(
+            name = "id",
+            in = ParameterIn.PATH,
+            required = true,
+            description = "The ID of the profile to retrieve",
+            example = "101"
+    ) @PathParam("id") int id) {
 
         dao = new ProfileDAO();
         Profile profile = dao.getById(id);
@@ -69,12 +138,37 @@ public class ProfileServices {
      */
     @POST
     @Path("POST/{age}/{height}/{weight}/{sexType}/{activity}")
+    @Operation(
+            summary = "Add a new profile",
+            description = "Creates a new profile using the provided parameters. Returns the created profile object and HTTP 201 status.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "201",
+                            description = "Profile successfully created",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = Profile.class),
+                                    examples = {
+                                            @ExampleObject(
+                                                    name = "New Profile Example",
+                                                    summary = "A newly created profile",
+                                                    value = "{ \"id\": \"101\", \"age\": \"30\", \"height\": \"175.0\", \"weight\": \"160.0\", \"sex\": \"male\", \"activity\": \"1.2\" }"
+                                            )
+                                    }
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Internal server error"
+                    )
+            }
+    )
     public Response addProfile(
-            @PathParam("age") int age,
-            @PathParam("height") double height,
-            @PathParam("weight") double weight,
-            @PathParam("sexType") String sexType,
-            @PathParam("activity") double activity) {
+            @Parameter(name = "age", in = ParameterIn.PATH, required = true, description = "Age in years", example = "30" ) @PathParam("age") int age,
+            @Parameter(name = "height", in = ParameterIn.PATH, required = true, description = "Height in inches", example = "65") @PathParam("height") double height,
+            @Parameter(name = "weight", in = ParameterIn.PATH, required = true, description = "Weight in pounds", example = "160.0") @PathParam("weight") double weight,
+            @Parameter(name = "sexType", in = ParameterIn.PATH, required = true, description = "Biological sex", example = "male") @PathParam("sexType") String sexType,
+            @Parameter(name = "activity", in = ParameterIn.PATH, required = true, description = "Activity level as a multiplier", example = "1.2") @PathParam("activity") double activity) {
 
         dao = new ProfileDAO();
         Profile newProfile = new Profile(age, height, weight, sexType, activity);
@@ -90,13 +184,42 @@ public class ProfileServices {
      */
     @PUT
     @Path("PUT/{id}/{age}/{height}/{weight}/{sexType}/{activity}")
+    @Operation(
+            summary = "Update an existing profile",
+            description = "Updates a profile by ID using the provided new values. Returns the updated profile if successful, or 404 if the profile does not exist.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Profile successfully updated",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = Profile.class),
+                                    examples = {
+                                            @ExampleObject(
+                                                    name = "Updated Profile Example",
+                                                    summary = "An updated profile",
+                                                    value = "{ \"id\": \"101\", \"age\": \"35\", \"height\": \"178.0\", \"weight\": \"165.0\", \"sex\": \"female\", \"activity\": \"1.4\" }"
+                                            )
+                                    }
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Profile not found"
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Internal server error"
+                    )
+            }
+    )
     public Response updateProfile(
-            @PathParam("id") int id,
-            @PathParam("age") int age,
-            @PathParam("height") double height,
-            @PathParam("weight") double weight,
-            @PathParam("sexType") String sexType,
-            @PathParam("activity") double activity) {
+            @Parameter(name = "id", in = ParameterIn.PATH, required = true, description = "ID of the profile to update", example = "101") @PathParam("id") int id,
+            @Parameter(name = "age", in = ParameterIn.PATH, required = true, description = "New age value", example = "35") @PathParam("age") int age,
+            @Parameter(name = "height", in = ParameterIn.PATH, required = true, description = "New height in inches", example = "68.0") @PathParam("height") double height,
+            @Parameter(name = "weight", in = ParameterIn.PATH, required = true, description = "New weight in pounds", example = "165.0") @PathParam("weight") double weight,
+            @Parameter(name = "sexType", in = ParameterIn.PATH, required = true, description = "New sex type", example = "female") @PathParam("sexType") String sexType,
+            @Parameter(name = "activity", in = ParameterIn.PATH, required = true, description = "New activity level multiplier", example = "1.4") @PathParam("activity") double activity) {
 
         dao = new ProfileDAO();
         Profile profileToUpdate = dao.getById(id);
@@ -127,7 +250,44 @@ public class ProfileServices {
      */
     @DELETE
     @Path("/DELETE/{id}")
-    public Response deleteProfile(@PathParam("id") int id) {
+
+    @Operation(
+            summary = "Delete a profile by ID",
+            description = "Deletes the profile associated with the given ID. Returns the deleted profile on success, or 404 if not found.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Profile successfully deleted",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = Profile.class),
+                                    examples = {
+                                            @ExampleObject(
+                                                    name = "Deleted Profile Example",
+                                                    summary = "A deleted profile",
+                                                    value = "{ \"id\": \"101\", \"age\": \"35\", \"height\": \"178.0\", \"weight\": \"165.0\", \"sex\": \"female\", \"activity\": \"1.4\" }"
+                                            )
+                                    }
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Profile not found"
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Internal server error"
+                    )
+            }
+    )
+
+    public Response deleteProfile( @Parameter(
+            name = "id",
+            in = ParameterIn.PATH,
+            required = true,
+            description = "ID of the profile to delete",
+            example = "101"
+    ) @PathParam("id") int id) {
 
         dao = new ProfileDAO();
         Profile profileToDelete = dao.getById(id);

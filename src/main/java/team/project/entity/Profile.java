@@ -1,5 +1,7 @@
 package team.project.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import javax.persistence.*;
 import java.util.Map;
 
@@ -12,28 +14,39 @@ import java.util.Map;
  */
 @Entity
 @Table(name = "profiles")
+@Schema(description = "Represents a set of bio data about an individual")
 public class Profile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @Schema(description = "Profile ID", example = "123")
     private int id;
 
+    @Schema(description = "Profile Age (in years)", example = "38")
     @Column(name = "age")
     private int age;
 
+    @Schema(description = "Profile Height (in inches)", example = "70")
     @Column(name = "height")
     private double height;
 
+    @Schema(description = "Profile Weight (in pounds)", example = "165")
     @Column(name = "weight")
     private double weight;
 
+    @Schema(description = "Profile Biological Sex", example = "male")
     @Column(name = "sexType")
     private String sexType;
 
+    @Schema(description = "Profile Activity Modifier, which is used to estimate how many calories are burned per day based on activity level", example = "1.725")
     @Column(name = "activity")
     private double activity;
 
+    @Schema(
+            description = "A map of calculated health and nutrition metrics derived from profile data. Common keys include BMR (Basal Metabolic Rate), TDEE (Total Daily Energy Expenditure), and BMI (Body Mass Index).",
+            example = "{\"BMR\": 1650.75, \"TDEE\": 2845.54, \"BMI\": 23.66}"
+    )
     @Transient
     private Map<String, Double> calculations;
 

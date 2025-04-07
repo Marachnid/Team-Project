@@ -1,5 +1,7 @@
 package team.project.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,10 +12,15 @@ import java.util.Map;
 public class Calculations {
 
     //instance variables
+    @Schema(description = "Age (in years)", example = "38")
     private int age;
+    @Schema(description = "Height (in inches)", example = "70")
     private double height;
+    @Schema(description = "Weight (in pounds)", example = "165")
     private double weight;
+    @Schema(description = "Biological Sex", example = "male")
     private String sexType;
+    @Schema(description = "Activity Modifier, which is used to estimate how many calories are burned per day based on activity level", example = "1.725")
     private double activity;
 
 
