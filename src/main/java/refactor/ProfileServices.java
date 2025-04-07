@@ -23,7 +23,7 @@ public class ProfileServices {
      */
     @GET
     @Path("GET/")
-    public Response getAllUsers() {
+    public Response getAllProfiles() {
         dao = new ProfileDAO();
         List<ProfileEntity> profiles = dao.getAllProfiles();
 
@@ -42,7 +42,7 @@ public class ProfileServices {
      */
     @GET
     @Path("GET/{id}")
-    public Response getUserById(@PathParam("id") int id) {
+    public Response getProfileById(@PathParam("id") int id) {
 
         dao = new ProfileDAO();
         ProfileEntity profile = dao.getById(id);
