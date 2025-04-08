@@ -2,14 +2,11 @@ package team.project.api;
 
 import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 //Defines the base URI for all resource URIs.
@@ -36,13 +33,5 @@ public class DataApplication extends Application {
         return h;
     }
 
-    //TODO the internet tells me this SHOULD remove the annoying wadl endpoints that don't mean anything in our api spec but it's not working yet! halp
-    //or we can figure out how to just filter endpoints from the spec on the api side?
-    @Override
-    public Map<String, Object> getProperties() {
-        Map<String, Object> props = new HashMap<>();
-        props.put("jersey.config.server.wadl.disableWadl", true);
-        return props;
-    }
 
 }
