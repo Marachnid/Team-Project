@@ -11,8 +11,8 @@
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 
-        <property name="connection.username">YOUR DB USERNAME</property>
-        <property name="connection.password">YOUR DB PASSWORD</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">student25#</property>
 
         <property name="hibernate.c3p0.min_size">5</property>
         <property name="hibernate.c3p0.max_size">20</property>

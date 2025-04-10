@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 
-<!-- to use this file, rename it to 'hibernate.cfg.xml' and fill in your DB username and password -->
+<!-- to use this file, rename it to 'hibernateGENERIC.cfg.xml' and fill in your DB username and password -->
 
 <!DOCTYPE hibernate-configuration PUBLIC
         "-//Hibernate/Hibernate Configuration DTD//EN"

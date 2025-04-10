@@ -91,4 +91,21 @@ class ProfileDAOTest {
         assertNull(dao.getById(1));
         assertEquals(5, dao.getAllProfiles().size());
     }
+
+    /**Test for non-existent id*/
+    @Test
+    void getByIdNotFound() {
+        profile = dao.getById(555);
+        assertNull(profile);
+    }
+
+    /**Test for wrong datatype*/
+    @Test
+    void invalidStringToIntConversionThrowsException() {
+        String invalidAge = "twenty";
+        assertThrows(NumberFormatException.class, () -> {
+            int age = Integer.parseInt(invalidAge);
+        });
+    }
+
 }
