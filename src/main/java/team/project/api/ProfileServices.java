@@ -8,6 +8,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import team.project.entity.Calculations;
 import team.project.entity.Profile;
 import team.project.persistence.ProfileDAO;
@@ -26,6 +28,7 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 public class ProfileServices {
 
+    private static final Logger logger = LogManager.getLogger(ProfileServices.class);
     ProfileDAO dao;
     Calculations calculations;
 
@@ -62,13 +65,18 @@ public class ProfileServices {
             }
     )
     public Response getAllProfiles() {
+        logger.info("Get request received for all profiles");
         dao = new ProfileDAO();
-        List<Profile> profiles = dao.getAllProfiles();
 
-        //iterate through retrieved list to set calculation map of each Profile
-        for (Profile profile : profiles) {
-            calculations = new Calculations(profile);
-            profile.setCalculations(calculations.getCalculations());
+        List<Profile> profiles = dao.getAllProfiles();
+        if (profiles == null || profiles.isEmpty()) {
+            logger.warn("No profiles found");
+        } else {
+            for (Profile profile : profiles) {
+                calculations = new Calculations(profile);
+                profile.setCalculations(calculations.getCalculations());
+            }
+            logger.info(profiles.size() + " profiles found");
         }
         return Response.ok(profiles).build();
     }
@@ -117,16 +125,19 @@ public class ProfileServices {
             example = "101"
     ) @PathParam("id") int id) {
 
+        logger.info("Get request received for profile with id {}", id);
         dao = new ProfileDAO();
         Profile profile = dao.getById(id);
 
         if (profile == null) {
+            logger.warn("Profile not found");
             return Response.status(Response.Status.NOT_FOUND).build();
 
         } else {
 
             calculations = new Calculations(profile);
             profile.setCalculations(calculations.getCalculations());
+            logger.info("Profile found and returned successfully");
             return Response.ok(profile).build();
         }
     }
@@ -170,9 +181,15 @@ public class ProfileServices {
             @Parameter(name = "sexType", in = ParameterIn.PATH, required = true, description = "Biological sex", example = "male") @PathParam("sexType") String sexType,
             @Parameter(name = "activity", in = ParameterIn.PATH, required = true, description = "Activity level as a multiplier", example = "1.2") @PathParam("activity") double activity) {
 
+        logger.info("POST request received to add profile");
+        if (sexType == null || sexType.isEmpty()) {
+            logger.error("sexType is empty");
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
         dao = new ProfileDAO();
         Profile newProfile = new Profile(age, height, weight, sexType, activity);
         dao.insertProfile(newProfile);
+        logger.info("Profile successfully added");
         return Response.status(Response.Status.CREATED).entity(newProfile).build();
     }
 
@@ -221,12 +238,13 @@ public class ProfileServices {
             @Parameter(name = "sexType", in = ParameterIn.PATH, required = true, description = "New sex type", example = "female") @PathParam("sexType") String sexType,
             @Parameter(name = "activity", in = ParameterIn.PATH, required = true, description = "New activity level multiplier", example = "1.4") @PathParam("activity") double activity) {
 
+        logger.info("PUT request received to update profile");
         dao = new ProfileDAO();
         Profile profileToUpdate = dao.getById(id);
 
         //prevents creating a new profile if the profile-to-edit is null
         if (profileToUpdate == null) {
-
+            logger.warn("Update failed for profile with id " + id);
             return Response.status(Response.Status.NOT_FOUND).build();
         } else {
 
@@ -238,6 +256,7 @@ public class ProfileServices {
             profileToUpdate.setActivity(activity);
 
             dao.updateProfile(profileToUpdate);
+            logger.info("Profile successfully updated");
             return Response.ok(profileToUpdate).build();
         }
     }
@@ -289,16 +308,18 @@ public class ProfileServices {
             example = "101"
     ) @PathParam("id") int id) {
 
+        logger.info("DELETE request received to delete profile");
         dao = new ProfileDAO();
         Profile profileToDelete = dao.getById(id);
 
         //prevents requests to delete null objects
         if (profileToDelete == null) {
-
+            logger.warn("Delete failed for profile with id " + id);
             return Response.status(Response.Status.NOT_FOUND).build();
         } else {
 
             dao.deleteProfile(profileToDelete);
+            logger.info("Profile successfully deleted");
             return Response.ok(profileToDelete).build();
         }
     }
