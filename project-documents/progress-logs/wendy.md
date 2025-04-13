@@ -6,3 +6,4 @@
 - wrote tests for the UserService class
 
 ## Week of 4/7
+- added log4j and null checks to the ProfileServices class
