@@ -2,9 +2,13 @@ package team.project.persistence;
 
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.criteria.HibernateCriteriaBuilder;
+import org.slf4j.LoggerFactory;
 import team.project.entity.Profile;
 
 import java.util.List;
