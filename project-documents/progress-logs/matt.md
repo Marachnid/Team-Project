@@ -24,3 +24,17 @@
   - Made several tweaks all-round to integrate activity-levels and other necessary pieces that were left out initially
   - Performed some unit testing in POSTMAN and took screenshots of successful API usages for each endpoint path
   - The backend is pretty much done besides some additional testing, validation handling, and logging
+
+
+## Week of 4/6
+
+- Demo'd improvements from the refactor in week of 3/31
+- Integrated the refactored files/configurations into the main project package and tested the implementation
+- Communicated with Pete and Wendy regarding tasks/how to approach AWS hosting and further testing/logging implementation
+- Reviewed pull requests and merged new code
+
+## Week of 4/13
+
+- Updated project documentation/design documents to reflect the projects current state
+- Refactored some changes in the project/endpoints
+- Finishing up with last details/steps of the project/presentation
