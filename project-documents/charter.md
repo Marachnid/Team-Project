@@ -13,17 +13,16 @@ Our goal is to design and implement a RESTful service that meets the requirement
 
 ## Team Members and Roles
 
+* Team members were responsible for multiple areas but had their own areas of ownership
+
 ### **Mathew** - Team Lead
-Responsible for overall project management, big picture decisions, and code reviews. Fills in as needed in other areas.
+Responsible for overall project management and project design, big picture decisions, and code reviews. Fills in as needed in other areas.
 
-### **Pete** - Principal Backend Developer
-Primarily responsible for design and delegation of work for the core API functionality. Pulls in help from others as needed.
+### **Pete** - Cloud Engineer
+Primarily responsible for AWS deployment and hosting, documentations site implementations
 
-### **Andrew** - Principal Frontend Developer
-Primarily responsible for design and delegation of work for API integration with a UI, as well as handling client-side requests. Pulls in help from others as needed.
-
-### **Wendy** - QA/DevOps Developer
-Primarily responsible for testing, debugging, and ensuring the service meets requirements. Also responsible for AWS deployment. Pulls in help from others as needed.
+### **Wendy** - QA/DB Engineer
+Primarily responsible for testing, debugging, and ensuring the service meets requirements. Also responsible for implementing logging in key areas of the program
 
 ---
 

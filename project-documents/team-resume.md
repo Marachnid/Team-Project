@@ -2,24 +2,7 @@
 
 ### Team Name: Units Untested
 
----
-
-### **Andrew**
-
-- **Hometown, state and/or schools attended:**  
-  I grew up in Janesville, WI and have only attended at MATC since high school.
-- **Special skills and/or talents:**  
-  I play guitar and love it.
-- **Professional strengths you share:**  
-  I’ve worked on a lot of teams and have managed several positions before.
-- **Major personal accomplishments:**  
-  Opened a restaurant in Milton, WI.
-- **Personal hobbies or interests:**  
-  Playing guitar, of course.
-- **Anything else you’d like to share about yourself:**  
-  I’m mostly a homebody, but I love the summer and going for walks.
-
----
+--- 
 
 ### **Matthew**
 
@@ -30,7 +13,7 @@
 - **Professional strengths you share:**  
   Organization and reading between the lines of requirements.
 - **Major personal accomplishments:**  
-  I’ve owned 8 tarantulas without getting bitten, I ridden my fatbike through chest-deep water, I still faintly remember the time I was happy.
+  I’ve owned 8 tarantulas without getting bitten, I've ridden my fatbike through chest-deep water, I still faintly remember the time I was happy.
 - **Personal hobbies or interests:**  
   Music (metal), guitar, tarantula keeping, drawing.
 - **Anything else you’d like to share about yourself:**  
@@ -64,7 +47,7 @@
 - **Professional strengths you share:**  
   If there’s a problem, I stay on it until I figure it out else I can’t stop thinking about it.
 - **Major personal accomplishments:**  
-  Started software development after having a baby and now about to graduate. (Couldn’t think I could do it in a million years.)
+  Started software development after having a baby and now about to graduate. (Didn't think I could do it in a million years.)
 - **Personal hobbies or interests:**  
   I’m a homebody, watching movies is mostly it for me.
 - **Anything else you’d like to share about yourself:**  

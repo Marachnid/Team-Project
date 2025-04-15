@@ -1,144 +1,75 @@
 # Project Summary / Overview
 
-With the growing use of health trackers and health research, it can be difficult to keep up with the many calculations and methods
-used, and even more difficult to find everything in one place. This service aims to centralize those calculations into one location with flexible usage.
-Generic users will be included in the service to allow displays of health metrics across various physical characteristics as well as having the capability
-to set or reuse common physical qualities to more easily return reused health metrics.
+API Service: Body Composition Calculator
 
-The service will provide:
-- Retrieving all people entities
-- Retrieve people by id
-- Add a person
-- Delete a person
-- Update a person
-- Retrieve health metrics directly w/user-entered BF% (uses optional field for BF%)
-- Retrieve health metrics directly w/calculated BF% (does not use optional field for BF%)
+With the growing usage of health trackers, research, and awareness of personal wellbeing and health, individuals have more power than ever to 
+track their health and body composition. However, with the many variations in formulas, complicated conversions from metric to imperial units, and 
+different applications of these calculations, it can be difficult and arduous to find or create health applications revolving around these calculations and metrics.
+This service seeks to create an API that centralizes a number of popularly used health metrics and calculations into one location 
+and only needing a physical Profile (age, height, weight, biological sex, and activity level) to calculate estimations. 
 
-* retrieving health metrics directly is the same as retrieving a person by ID, but without extra steps (better for one-off custom values)
+The service uses age, height, weight, biological sex, and activity level to calculate and return estimations for a Profile's: 
+- Body Mass Index (BMI)
+- Basal Metabolic Rate (BMR)
+- Lean Body Mass (LBM)
+- Body Fat percentage 
+- Total Daily Energy Expenditure (TDEE)
+- Ideal Body Weight (IBW)
+
+
+## Endpoints
+### RESTful
+#### Path 'services/profile'
+RESTful endpoints consist of HTTP GET/PUT/POST/DELETE methods
+that access/modify generic Profile entities to show how calculations change from one set (Profile) of physical characteristics to another. When returning a Profile entity, it will return
+all persistent profile characteristics as well as a collection of calculations performed on said Profile. This creates an easily reusable/callable sample of health calculations/metrics for a 
+given body type, age, etc...
+
+- [GET all profiles](project-documents/screenshots/API-Profile-GET-All.png)
+- [GET profile by ID](project-documents/screenshots/API-Profile-GET.png)
+- [PUT profile by ID](project-documents/screenshots/API-Profile-PUT.png)
+- [POST profile by ID](project-documents/screenshots/API-Profile-POST.png)
+- [DELETE profile by ID](project-documents/screenshots/API-Profile-DELETE.png)
+
+
+### Non-RESTful
+#### Path 'services/calculate'
+The non-RESTful endpoints are lightweight versions of the RESTful endpoints. These endpoints do not have any DB interactions or state and perform the same calculations as
+the RESTful /profile endpoints, but it receives the raw parameters instead of using HTTP methods. After receiving the raw parameters, there is a /full path that returns 
+both the performed calculations and parameters received - similar to a /profile/GET method. The other path is /light and it only returns the calculations, nothing more.
+
+The goal of these endpoints was to provide a lightweight and quick way to use the service and control which kind of responses/values to receive.
+
+- [Calculate values with FULL response](project-documents/screenshots/API-Calculate-FULL.png)
+- [Calculate values with LIGHT response](project-documents/screenshots/API-Calculate-LIGHT.png)
 
 ## RESOURCES
-
-### People
-
-| Property          | Description             | Type/Format |
-|-------------------|-------------------------|-------------|
-| id                | unique identifier       | number      |
-| age               | Person's age            | number      |
-| sex               | Person's biological sex | string      |
-| height            | Person's height         | number      |
-| weight            | Person's weight         | number      |
-| bodyfat(optional) | Person's body fat %     | number      |
+### Profile attributes
+| Property | Description                               | Type/Format |
+|----------|-------------------------------------------|-------------|
+| id       | unique identifier                         | int         |
+| age      | Physical characteristic - age             | int         |
+| height   | Physical characteristic - height          | double      |
+| weight   | Physical characteristic - weight          | double      |
+| sex      | Physical characteristic - biological sex  | String      |
+| activity | Physical characteristic - weekly activity | double      |
 
 
-### Calculations
-
-| Property             | Description                    | Type/Format |
-|----------------------|--------------------------------|-------------|
-| BMI                  | body mass index                | number      |
-| BMR                  | basal metabolic rate           | number      |
-| LBM                  | lean body mass                 | number      |
-| bodyfat (calculated) | body fat %                     | number      |
-| IBW                  | ideal body weight              | number      |
-| TDEE                 | total daily energy expenditure | number      |
-
-### Considerations
-- IBW may or may not be desirable, it can be fairly inaccurate and relies on height being 5ft or above
-- TDEE - we can calculate TDEE with/without BF%, with uses a different set of equations
-  - estimated BF% through calculations may/may not be accurate
-  - we could possibly make user-entered bf% optional, or have a different API method to retrieve that unique info
+### Calculation attributes
+| Property | Description                    | Type/Format |
+|----------|--------------------------------|-------------|
+| BMI      | body mass index                | double      |
+| BMR      | basal metabolic rate           | double      |
+| LBM      | lean body mass                 | double      |
+| bodyfat  | body fat %                     | double      |
+| IBW      | ideal body weight              | double      |
+| TDEE     | total daily energy expenditure | double      |
 
 
-## SERVICE CALLS
-### Person
-- GET/people/json/
-- GET/people/json/:id
-- POST/people
-- PUT/people/:id
-- DELETE/people/:id
-
-### Calculations
-- GET/calculation/json/:age:height:weight
-- GET/calculation/json/:age:height:weight:bodyfat (uses a different formula for TDEE w/BF%)
-
-### Response Examples
-All Json responses
-
-#### Person responses
-Example response of getting all people/demo profiles. Getting by ID will just return a single object instead of a collection
-- Might need to view in 'edit' mode, formatting in display mode was not as intended
-[
-
-  {
-    "id": "1"
-    "height": "70",
-    "weight": "200",
-    "sex": "male",
-    "bodyfat": "",
-    "calculations": {
-      "BMI": "value",
-      "BMR": "value",
-      "LBM": "value",
-      "bodyfat": "value",
-      "IBW": "value",
-      "TDEE": "value"
-    }
-  },
-  {
-    "id": "2"
-    "height": "65",
-    "weight": "150",
-    "sex": "male",
-    "bodyfat": "15",
-    "calculations": {
-      "BMI": "value",
-      "BMR": "value",
-      "LBM": "value",
-      "bodyfat": "value",
-      "IBW": "value",
-      "TDEE": "value"
-    }
-  },
-  {...}
-
-]
-
-#### Calculation-only responses
-We can choose to return both the submitted attributes and calculated values (A), or only the calculated values (B).
-
-##### Example A:
-  {
-    "height": "70",
-    "weight": "200",
-    "sex": "male",
-    "bodyfat": "",
-    "calculations": {
-      "BMI": "value",
-      "BMR": "value",
-      "LBM": "value",
-      "bodyfat": "value",
-      "IBW": "value",
-      "TDEE": "value"
-    }
-  }
-##### Example B:
-{
-  "BMI-value": "value",
-  "BMR-value": "value",
-  "LBM-value": "value",
-  "bodyfat-value": "value",
-  "IBW-value": "value",
-  "TDEE-value": "value"
-  ]
-}
-
-### Considerations
-- I'm thinking the way this would work is we have a collection of people objects of varying heights, sex, weight, etc... and each would have their own collection of health metrics/data
-- Something like: people{ age, weight, height, etc.., metrics[BMI, BMR, IBW, etc...] }
-- When a person is returned, their physical data/qualities are used to calculate and return a collection of health metric data alongside age/height/etc..
-- Ideally, I'd want to have a way of returning a collection of health metric data by entering the raw parameters for people objects instead of returning a predefined people object
 
 
-## Calculations
+
+## CALCULATIONS
 ### Body mass index (BMI) - assessment/ratio of body weight relative to height
 - BMI = Weight * 703 / height^2
 
@@ -168,15 +99,3 @@ We can choose to return both the submitted attributes and calculated values (A),
 (assumes heights start at 5ft, individuals shorter than 5ft may need to adjust things -- on the fence about using this)
 - Men: IBW = 50 + (2.3 * (height in inches over 60))
 - Women: IBW = 45.5 (2.3 * (height in inches over 60))
-
-### BMR with BF - Katch-McArdle equation:
-(this equation is an entirely different formula for calculating TDEE, it does not make man/woman distinctions in LBM calculation)
-- LBM = weight * (1 - body fat % / 100)
-- BMR = 370 / (9.8 * LBM)
-- TDEE = BMR * activity level
-- activity levels:
-    - sedentary - 1.2             --office job with no exercise
-    - lightly active - 1.375      --exercise 1-2 times a week
-    - moderately active - 1.55    --exercise 3-5 times a week
-    - active - 1.725              --exercise 6-7 times a week
-    - extra active - 1.9          --exercise 6-7 hard exercises a week
