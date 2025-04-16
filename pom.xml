@@ -16,7 +16,7 @@
     <servlet.version>4.0.1</servlet.version>
     <jstl.version>1.2</jstl.version>
     <persistence.version>2.2</persistence.version>
-    <hibernate.version>6.4.3.Final</hibernate.version>
+    <hibernate.version>5.6.15.Final</hibernate.version>
     <mysql.version>8.2.0</mysql.version>
     <mysql.protobuf.version>4.28.2</mysql.protobuf.version>
     <junit4.version>4.13.1</junit4.version>
@@ -79,26 +79,15 @@
       <version>${persistence.version}</version>
     </dependency>
 
-<!--    <dependency>-->
-<!--      <groupId>org.hibernate.orm</groupId>-->
-<!--      <artifactId>hibernate-core</artifactId>-->
-<!--      <version>${hibernate.version}</version>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>org.hibernate.orm</groupId>-->
-<!--      <artifactId>hibernate-c3p0</artifactId>-->
-<!--      <version>${hibernate.version}</version>-->
-<!--    </dependency>-->
-
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
-      <version>5.6.15.Final</version>
+      <version>${hibernate.version}</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-c3p0</artifactId>
-      <version>5.6.15.Final</version>
+      <version>${hibernate.version}</version>
     </dependency>
 
     <!-- MySql -->
